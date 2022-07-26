@@ -1,5 +1,6 @@
 class Solution {
     public String minWindow(String s, String p) {
+        if(s.length()<p.length()) return "";
        int len = 0;
         int minlen = Integer.MIN_VALUE;
         String ans = "";
