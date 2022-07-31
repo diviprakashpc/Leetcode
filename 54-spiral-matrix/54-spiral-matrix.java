@@ -5,7 +5,7 @@ class Solution {
           int cs = 0;
           int ce = matrix[0].length-1;
           List<Integer> ans = new ArrayList<>();
-          while(rs<=re){
+          while(true){
               for(int i = cs ; i <= ce ; i++){
                   ans.add(matrix[rs][i]);
               }
