@@ -2,23 +2,23 @@ class MedianFinder {
       PriorityQueue<Integer> min;
       PriorityQueue<Integer> max;
     public MedianFinder() {
-        max = new PriorityQueue<>();
-        min = new PriorityQueue<>((a,b)->b-a);
+        min = new PriorityQueue<>();
+        max = new PriorityQueue<>((a,b)->b-a); //glati se ulta min-max krke submit kr diya tha. Ye wala sahi h ab.
     }
     
     public void addNum(int num) {
-        if(min.isEmpty()){
-            min.add(num);
-        }
-        else if(num>min.peek()){
+        if(max.isEmpty()){
             max.add(num);
-            if(max.size()>min.size()+1){
-                min.add(max.remove());
-            }
-        }else{
+        }
+        else if(num>max.peek()){
             min.add(num);
             if(min.size()>max.size()+1){
                 max.add(min.remove());
+            }
+        }else{
+            max.add(num);
+            if(max.size()>min.size()+1){
+                min.add(max.remove());
             }
         }
     }
@@ -27,7 +27,7 @@ class MedianFinder {
         if(min.size()==max.size()){
             return ((double)min.peek()+(double)max.peek())/2.0;
         }
-        return (min.size()>max.size()) ? min.peek() : max.peek();
+        return (max.size()>min.size()) ? max.peek() : min.peek();
     }
 }
 
