@@ -24,14 +24,16 @@ class Solution {
         if(root==null) return;
         
         al.add(root.val);
-        helper(root.left,k,al);
-        helper(root.right,k,al);
-        
-        long sum = 0;
+      long sum = 0;
         for(int i = al.size()-1 ; i>=0; i--){
             sum+=al.get(i);
             if(sum==k) paths++;
         }
+        helper(root.left,k,al);
+        helper(root.right,k,al);
+        
+        
+       
         al.remove(al.size()-1);
     }
 }
