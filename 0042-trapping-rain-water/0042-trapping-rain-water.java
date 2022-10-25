@@ -1,22 +1,21 @@
 class Solution {
     public int trap(int[] height) {
-        int[] prefixMax = new int[height.length];
-        int[] suffixMax = new int[height.length];
-        int currMax = -1; 
-        for(int i= 0 ; i < height.length ; i++){
-          prefixMax[i] = Math.max(currMax,height[i]);
-          currMax = Math.max(currMax,height[i]);
-        }
-      
-       currMax = -1;
-       for(int i = height.length-1;i>=0 ;i--){
-         suffixMax[i] = Math.max(currMax,height[i]);
-         currMax = Math.max(currMax,height[i]);
-       }
-      
         int waterTrapped = 0;
-        for(int i = 0 ; i < height.length;i++){
-           waterTrapped+=(Math.min(prefixMax[i],suffixMax[i])-height[i]);
+        int left = 0;
+        int right = height.length-1;
+        int lMax = 0;
+        int rMax = 0;
+        while(left<=right){
+          if(height[left]<=height[right]){
+             if(height[left]>=lMax) lMax = height[left];
+            else waterTrapped+=(lMax-height[left]);
+            left++;
+          }
+          else{
+             if(height[right]>=rMax) rMax = height[right];
+            else waterTrapped+=(rMax-height[right]);
+            right--;
+          }
         }
       return waterTrapped;
     }
