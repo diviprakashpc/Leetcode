@@ -5,14 +5,20 @@ class Solution {
        Arrays.sort(nums);
       int left = nums.length;
       int right = 0;
-      for(int i = 0 ; i < orignal.length ;i++){
-        int a  = orignal[i];
-        int b = nums[i];
-        if(a!=b){
-          left = Math.min(i,left);
-          right = Math.max(i,right);
+      for(int i = 0 ; i <= orignal.length-1 ;i++){
+         if(nums[i]!=orignal[i]){
+            left = i;
+           break;
+         }
+      }
+      
+      for(int i = nums.length-1; i>=0;i--){
+        if(nums[i]!=orignal[i]) {
+          right = i;
+          break;
         }
       }
+     // System.out.println(left+" "+right);
       return left<right?right-left+1:0;
     }
 }
