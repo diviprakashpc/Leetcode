@@ -28,19 +28,19 @@ class Solution {
   
     private int findNext(Job[] jobs, int index) {
         int start = 0, end = index - 1;
-        while (start <= end) {
-            int mid = (start + end) / 2;
-            if (jobs[mid].e <= jobs[index].s) {
-                if (jobs[mid + 1].e <= jobs[index].s)
-                    start = mid + 1;
-                else
-                    return mid;
-            }
-            else
-                end = mid - 1;
+        int lb = -1;
+        while(start<=end){
+          int mid = (start+end)/2;
+          if(jobs[mid].e>jobs[index].s){
+             end = mid-1;
+          }else{
+            lb = Math.max(lb,mid);
+            start = mid + 1;
+          }
         }
-      return -1;
+    return lb;
     }
+  
         
   
 }
