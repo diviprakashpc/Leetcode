@@ -1,26 +1,32 @@
-public class Solution {
+class Solution {
     public boolean checkInclusion(String s1, String s2) {
-        if (s1.length() > s2.length())
-            return false;
-        int[] s1map = new int[26];
-        int[] s2map = new int[26];
-        for (int i = 0; i < s1.length(); i++) {
-            s1map[s1.charAt(i) - 'a']++;
-            s2map[s2.charAt(i) - 'a']++;
+        int[] f1  = new int[26];
+        int[] f2 = new int[26];
+        for(int i = 0 ; i < s1.length() ; i++) f1[s1.charAt(i)-'a']++;
+        int m  = s1.length();
+        int n = s2.length();
+        int i  = 0 ;
+        int j = 0;
+        
+        while(j < s2.length()){
+            if(j-i+1<m){
+                f2[s2.charAt(j)-'a']++;
+            }else{
+                 f2[s2.charAt(j)-'a']++;
+                 if(matching(f1,f2)) return true;
+                 f2[s2.charAt(i)-'a']--;
+                 if( f2[s2.charAt(i)-'a']<=0)  f2[s2.charAt(i)-'a'] = 0;
+                i++;
+            }
+            j++;
         }
-        for (int i = 0; i < s2.length() - s1.length(); i++) {
-            if (matches(s1map, s2map))
-                return true;
-            s2map[s2.charAt(i + s1.length()) - 'a']++;
-            s2map[s2.charAt(i) - 'a']--;
-        }
-        return matches(s1map, s2map);
+        
+        return false;
     }
     
-    public boolean matches(int[] s1map, int[] s2map) {
-        for (int i = 0; i < 26; i++) {
-            if (s1map[i] != s2map[i])
-                return false;
+    public boolean matching(int[] f1 , int[] f2){
+        for(int i = 0 ; i < 26  ; i++){
+            if(f1[i]!=f2[i]) return false;
         }
         return true;
     }
