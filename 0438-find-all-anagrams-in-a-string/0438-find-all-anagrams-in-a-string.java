@@ -5,7 +5,7 @@ class Solution {
         checkInclusion(p,s);
         return ans;
     }
-    
+      //checkInclusion is method of leetcode permutation in string ques.
      public void checkInclusion(String s1, String s2) {
         int[] f1  = new int[26];
         int[] f2 = new int[26];
