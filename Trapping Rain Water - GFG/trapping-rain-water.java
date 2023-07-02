@@ -40,25 +40,27 @@ class Solution{
     // Function to find the trapped water between the blocks.
     static long trappingWater(int arr[], int n) { 
         // Your code here
-        int[] mxl = new int[n];
-        int[] mxr = new int[n];
-        int mx1 = arr[0];
-        int mx2 = arr[n-1];
-        for(int i = 0; i < n ; i++){
-            mx1 = Math.max(mx1,arr[i]);
-            mxl[i] = mx1;
-            mx2 = Math.max(mx2,arr[n-i-1]);
-            mxr[n-i-1] = mx2;
-        }
-    
         long ans = 0;
-        for(int i = 0 ; i < n ; i++){
-            long water = (Math.min(mxl[i],mxr[i]) - arr[i])*1L;
-            if(water>=0)
-            ans+=water;
+        int i = 0;
+        int j = n-1;
+        int lmx = arr[0];
+        int rmx = arr[n-1];
+        while(i<=j){
+            if(lmx<=rmx){
+                if(arr[i]>=lmx){
+                    lmx = arr[i];
+                }
+                ans = ans + (lmx-arr[i])*1L;
+                i++;
+            }else{
+                if(arr[j]>=rmx){
+                    rmx = arr[j]; 
+                }
+                ans = ans + (rmx-arr[j])*1L;
+                j--;
+            }
         }
         return ans;
     } 
 }
-
 
